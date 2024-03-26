@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    <link rel="stylesheet" href="style.css"> </head>
+<body>
+    <h1>Welcome to the URL Shortener</h1>
+
+    {% if request.method == 'POST' %}
+    <p>Your shortened URL is:</p>
+    <a href="{{ short_url }}">{{ short_url }}</a>
+  {% endif %}
+    <form method="POST">
+    <label for="urlholder">Enter your original URL:</label>
+    <input type="text" id="urlholder" name="urlholder">
+    <button type="submit">Shorten URL</button>
+  </form>
+
+  <h2>Previously Shortened URLs</h2>
+  <ul>
+    {% for url in urls %}
+      <li><a href="{{ url.short_url }}">{{ url.org_url }}</a> - {{ url.short_url }}</li>
+    {% endfor %}
+  </ul>
+     <a href="/logout">Logout</a>
+</body>
+</html>
